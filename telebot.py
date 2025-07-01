@@ -1,4 +1,4 @@
-import telebot
+import Telebot
 
 # Reemplaza con tu token de bot
 BOT_TOKEN = '6973429821:AAGmCkWXIvHMN7yy_WbXcMNDoYP_zVHGaNk'

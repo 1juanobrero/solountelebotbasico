@@ -1,17 +1,14 @@
 import telebot
 import time
-import ssl
 from flask import Flask, request
 
 # Instanciamos la API de Telegram
 bot = telebot.TeleBot("7926885285:AAGTZZ04Im-3lPTFEp_vh-w8mRDSTZKfNsA")
 
 # Flask setup
-WEBHOOK_HOST = 'https://solountelebotbasico.onrender.com/'  # Reemplaza con la IP o dominio de tu servidor
-WEBHOOK_PORT = 443  # Puerto HTTPS (generalmente 443)
+WEBHOOK_HOST = 'solountelebotbasico.onrender.com'  # Tu dominio de Render
+WEBHOOK_PORT = 443  # Puerto HTTPS
 WEBHOOK_LISTEN = '0.0.0.0'  # Escucha en todas las interfaces
-WEBHOOK_SSL_CERT = './webhook_cert.pem'  # Ruta al certificado SSL
-WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Ruta a la clave privada SSL
 WEBHOOK_URL_BASE = f"https://{WEBHOOK_HOST}:{WEBHOOK_PORT}"
 WEBHOOK_URL_PATH = "/{TELEGRAM_TOKEN}"  # Debe ser único
 
@@ -50,14 +47,10 @@ if __name__ == '__main__':
 
     # Set webhook
     try:
-        bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
-                        certificate=open(WEBHOOK_SSL_CERT, 'r'))
+        bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH)
         print(f"Webhook set to {WEBHOOK_URL_BASE + WEBHOOK_URL_PATH}")
     except Exception as e:
         print(f"Failed to set webhook: {e}")
 
     # Start the Flask server
-    context = (WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV)
-    web_server.run(host=WEBHOOK_LISTEN,
-                   port=WEBHOOK_PORT,
-                   ssl_context=context)
+    web_server.run(host=WEBHOOK_LISTEN, port=WEBHOOK_PORT)

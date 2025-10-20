@@ -2,8 +2,10 @@ import telebot
 import time
 from flask import Flask, request
 
+TELEGRAM_TOKEN = "7926885285:AAGTZZ04Im-3lPTFEp_vh-w8mRDSTZKfNsA"
+
 # Instanciamos la API de Telegram
-bot = telebot.TeleBot("7926885285:AAGTZZ04Im-3lPTFEp_vh-w8mRDSTZKfNsA")
+bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
 # Flask setup
 WEBHOOK_HOST = 'solountelebotbasico.onrender.com'  # Tu dominio de Render
